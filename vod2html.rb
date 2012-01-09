@@ -2,6 +2,7 @@ puts "\n \n \n \n"
 puts "#######################################################################"
 puts "#                                                                     #"
 puts "# vod2html v1.0 does not carry any license and is free to be          #"
+puts "# vod2html v0.9 does not carry any license and is free to be          #"
 puts "# distributed or altered. Enjoy!                                      #"
 puts "# --                                                                  #"
 puts "# David Lyons                                                         #"
@@ -36,7 +37,7 @@ def output(flv, location)
 
 	### URL base
 	base = "" # Inset the url where your organization stores FLVs
-	
+
 	title = flv.dup.gsub!(".flv", ".html")
 	vid = flv.dup
 	vid.slice!(0..6)
