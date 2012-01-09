@@ -1,15 +1,12 @@
-﻿README
-======
-
-Purpose
--------
+﻿Purpose
+=======
 
 This script takes directory input (a directory containing .flv files) and 
 creates like-named HTML files with embed HTML for use on a flash server. It 
 also outputs a .txt file with URLs to all the HTML files.
 
 Use
----
+===
 
 1. Paste your embed code into the *embed* variable and your base URL into the
 *base* variable.
