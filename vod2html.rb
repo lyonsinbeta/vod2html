@@ -7,10 +7,20 @@
 #                                                                     #
 #######################################################################
 
+### Edit these variables for your situation
+
+### HTML embed code
+embed = "" # Insert embed HTML into this variable.
+
+### URL base
+base = "" # Flash server url (with trailing slash)
+
+### Do not edit below this line ###
 
 ###### Methods ######
 
 ### Cleans up and validates user input, or forces resubmission of user input
+
 def validate_directory(dir)
 	puts "Enter the full directory path of the flv files." unless dir
 	input =  dir || gets.chomp
@@ -30,12 +40,6 @@ end
 ### Also creates a .txt with a list of all the URLs for the files in that folder.
 
 def output(flv, location)
-	### HTML embed code
-	embed = "" # Insert your embed HTML into this variable.
-
-	### URL base
-	base = "" # Inset the url where your organization stores FLVs (with trailing slash)
-
 	title = flv.dup.gsub!(".flv", ".html")
 	vid = flv.dup
 	vid.slice!(0..6)
@@ -49,9 +53,9 @@ def output(flv, location)
 	puts "Files created successfully." # Kind of unecessary as this will print as long as the directory is valid even if no files are created, I think.
 end
 
-###### The actual script ######
+### The script
 
-dir = ARGV[0].dup unless ARGV.empty?			# Gets file location if not provided in as command line argument.
+dir = ARGV[0].dup unless ARGV.empty?		# Gets file location if not provided in as command line argument.
 folder = validate_directory(dir)			# Creates a new instance of the Cleaner class and calls the is_valid_dir method.
 files = folder.clone + "*.flv"				# Wildcard query for all .flv's in the folder entered by the user.
 flvs = Dir.glob("#{files}") 				# Creates an array of all .flvs files in the directory.
