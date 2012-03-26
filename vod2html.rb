@@ -1,30 +1,28 @@
-puts "\n \n \n \n"
-puts "#######################################################################"
-puts "#                                                                     #"
-puts "# vod2html v1.0 does not carry any license and is free to be          #"
-puts "# vod2html v0.9 does not carry any license and is free to be          #"
-puts "# distributed or altered. Enjoy!                                      #"
-puts "# --                                                                  #"
-puts "# David Lyons                                                         #"
-puts "#                                                                     #"
-puts "#######################################################################"
-puts "\n \n \n \n"
+#######################################################################
+#                                                                     #
+# vod2html v1.0 does not carry any license and is free to be          #
+# distributed or altered. Enjoy!                                      #
+# --                                                                  #
+# David Lyons                                                         #
+#                                                                     #
+#######################################################################
+
 
 ###### Methods ######
 
 ### Cleans up and validates user input, or forces resubmission of user input
-def is_valid_dir()
-	puts "Enter the full directory path of the flv files."
-	input = gets.chomp
+def validate_directory(dir)
+	puts "Enter the full directory path of the flv files." unless dir
+	input =  dir || gets.chomp
 	input.gsub!('\\', '/')
 	input += '/' unless input[-1..-1] == '/'
 	until File.directory?(input) && Dir.glob("#{input}*.flv") != []
-		puts "That directory either doesn't exist or contains no .flv files. \n Enter the full directory path of the flv files."
-		input = gets.chomp
+		puts "That directory either doesn't exist or contains no .flv files. \nEnter the full directory path of the flv files."
+		input = $stdin.gets.chomp
 		input.gsub!('\\', '/')
 		input += '/' unless input[-1..-1] == '/'
 	end
-return input
+	dir = input
 end
 
 ### For each .flv in the directory create an html document named
@@ -36,7 +34,7 @@ def output(flv, location)
 	embed = "" # Insert your embed HTML into this variable.
 
 	### URL base
-	base = "" # Inset the url where your organization stores FLVs
+	base = "" # Inset the url where your organization stores FLVs (with trailing slash)
 
 	title = flv.dup.gsub!(".flv", ".html")
 	vid = flv.dup
@@ -53,7 +51,8 @@ end
 
 ###### The actual script ######
 
-folder = is_valid_dir()						# Creates a new instance of the Cleaner class and calls the is_valid_dir method.
+dir = ARGV[0].dup unless ARGV.empty?			# Gets file location if not provided in as command line argument.
+folder = validate_directory(dir)			# Creates a new instance of the Cleaner class and calls the is_valid_dir method.
 files = folder.clone + "*.flv"				# Wildcard query for all .flv's in the folder entered by the user.
 flvs = Dir.glob("#{files}") 				# Creates an array of all .flvs files in the directory.
 flvs.each { |flv| output(flv, folder) }		# Send each flv file through the my output method.
