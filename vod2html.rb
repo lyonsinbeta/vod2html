@@ -10,10 +10,10 @@
 ### Edit these variables for your situation
 
 ### HTML embed code
-embed = "" # Insert embed HTML into this variable.
+$EMBED = "" # Insert embed HTML into this variable.
 
 ### URL base
-base = "" # Flash server url (with trailing slash)
+$BASE = "" # Flash server url (with trailing slash)
 
 ### Do not edit below this line ###
 
@@ -43,12 +43,12 @@ def output(flv, location)
 	title = flv.dup.gsub!(".flv", ".html")
 	vid = flv.dup
 	vid.slice!(0..6)
-	body = embed.gsub("sample.flv", vid) 
+	body = $EMBED.gsub("sample.flv", vid) 
 	htmlOutput = File.open(title, "w")
 		htmlOutput.write(body)
 	htmlOutput.close
 	linkList = File.open("#{location}List of Links.txt", "a")
-		linkList.write(base + vid.gsub(".flv", ".html") + "\n")
+		linkList.write($BASE + vid.gsub(".flv", ".html") + "\n")
 	linkList.close
 	puts "Files created successfully." # Kind of unecessary as this will print as long as the directory is valid even if no files are created, I think.
 end
