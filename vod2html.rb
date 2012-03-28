@@ -59,4 +59,5 @@ dir = ARGV[0].dup unless ARGV.empty?		# Gets file location if not provided in as
 folder = validate_directory(dir)			# Creates a new instance of the Cleaner class and calls the is_valid_dir method.
 files = folder.clone + "*.flv"				# Wildcard query for all .flv's in the folder entered by the user.
 flvs = Dir.glob("#{files}") 				# Creates an array of all .flvs files in the directory.
+File.delete("#{folder}List of Links.txt") if File.exists?("#{folder}List of Links.txt")
 flvs.each { |flv| output(flv, folder) }		# Send each flv file through the my output method.
