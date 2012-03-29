@@ -8,8 +8,8 @@ also outputs a .txt file with URLs to all the HTML files.
 ## Use
 
 
-1. Paste your default sample embed code into the **embed** variable and your base URL into the
-**base** variable.
+1. Paste your default sample embed code into the **$EMBED_HTML** global, your base URL into the
+**$BASE_URL** global, and the sample.flv into the **$SAMPLE_FLV** global.
 2. Run the script and follow the prompts or supply the directory as a command line argument.
 3. Profit.
 
