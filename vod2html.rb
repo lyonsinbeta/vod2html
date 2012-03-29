@@ -3,21 +3,21 @@ $EMBED_HTML = ""
 $BASE_URL = ""
 
 def normalize_directory(dir)
-	normalized = dir.gsub('\\', '/')
-	normalized += '/' unless normalized[-1] == '/'
+  normalized = dir.gsub('\\', '/')
+  normalized += '/' unless normalized[-1] == '/'
 end
 
 def validate_directory(dir)
-	puts "Enter the full directory path of the flv files." unless dir
-	dir =  dir || gets.chomp
+  puts "Enter the full directory path of the flv files." unless dir
+  dir =  dir || gets.chomp
+  dir = normalize_directory(dir)
+  until File.directory?(dir) && Dir.glob("#{dir}*.flv") != []
+	puts "That directory either doesn't exist or contains no .flv files. \nEnter the full directory path of the flv files."
+	dir = $stdin.gets.chomp
 	dir = normalize_directory(dir)
-	until File.directory?(dir) && Dir.glob("#{dir}*.flv") != []
-		puts "That directory either doesn't exist or contains no .flv files. \nEnter the full directory path of the flv files."
-		dir = $stdin.gets.chomp
-		dir = normalize_directory(dir)
-	end
+  end
 
-	dir
+  dir
 end
 
 def output_html_wrapper(flv_filename, output_folder)
