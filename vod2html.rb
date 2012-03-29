@@ -2,6 +2,8 @@ $EMBED_HTML = ""
 
 $BASE_URL = ""
 
+$SAMPLE_FLV = ""
+
 def normalize_directory(dir)
   normalized = dir.gsub('\\', '/')
   normalized += '/' unless normalized[-1] == '/'
@@ -23,12 +25,12 @@ end
 def output_html_wrapper(flv_filename, output_folder)
   html_filename = flv_filename.gsub(".flv", ".html")
 
-  html_body = $EMBED_HTML.gsub("sample.flv", flv_filename.slice(7..flv_filename.length)) 
+  html_body = $EMBED_HTML.gsub($SAMPLE_FLV, flv_filename.sub(/[a-z][:]/, '')) 
   html_output = File.open(html_filename, "w")
   html_output.write(html_body)
   html_output.close
 
-  link = flv_filename.slice(2..flv_filename.length).gsub(".flv", ".html")
+  link = flv_filename.sub(/[a-z][:]/, '').gsub(".flv", ".html")
   link_list = File.open("#{output_folder}List of Links.txt", "a")
   link_list.write($BASE_URL + link + "\n")
   link_list.close
