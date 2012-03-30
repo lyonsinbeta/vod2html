@@ -30,8 +30,7 @@ ARGV[0] ? folder = normalize_directory(ARGV[0]) : folder = normalize_directory(g
   
 until Dir.glob("#{folder}*.flv") != []
   puts "That directory either doesn't exist or contains no .flv files. \nEnter the full directory path of the flv files."
-  folder = $stdin.gets.chomp
-  folder = normalize_directory(folder)
+  folder = normalize_directory($stdin.gets.chomp)
 end
 
 flvs = Dir.glob("#{folder}*.flv") 
