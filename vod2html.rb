@@ -9,19 +9,6 @@ def normalize_directory(dir)
   normalized += '/' unless normalized[-1] == '/'
 end
 
-def validate_directory(dir)
-  puts "Enter the full directory path of the flv files." unless dir
-  dir =  dir || gets.chomp
-  dir = normalize_directory(dir)
-  until File.directory?(dir) && Dir.glob("#{dir}*.flv") != []
-	puts "That directory either doesn't exist or contains no .flv files. \nEnter the full directory path of the flv files."
-	dir = $stdin.gets.chomp
-	dir = normalize_directory(dir)
-  end
-
-  dir
-end
-
 def output_html_wrapper(flv_filename, output_folder)
   html_filename = flv_filename.gsub(".flv", ".html")
 
@@ -38,8 +25,15 @@ def output_html_wrapper(flv_filename, output_folder)
   puts "#{html_filename} created successfully." if File.exists?(html_filename)
 end
 
-folder = ARGV[0].dup unless ARGV.empty?
-folder = validate_directory(folder)
+puts "Enter the full directory path of the flv files." unless ARGV[0]
+ARGV[0] ? folder = normalize_directory(ARGV[0]) : folder = normalize_directory(gets.chomp)
+  
+until Dir.glob("#{folder}*.flv") != []
+  puts "That directory either doesn't exist or contains no .flv files. \nEnter the full directory path of the flv files."
+  folder = $stdin.gets.chomp
+  folder = normalize_directory(folder)
+end
+
 flvs = Dir.glob("#{folder}*.flv") 
 File.delete("#{folder}List of Links.txt") if File.exists?("#{folder}List of Links.txt")
 flvs.each { |flv| output_html_wrapper(flv, folder) }
