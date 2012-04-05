@@ -24,7 +24,7 @@ def output_html_wrapper(flv_filename, output_folder)
   link_list = File.open("#{output_folder}List of Links.txt", "a")
   link_list.write($BASE_URL + link + "\n")
 	
-  puts "#{html_filename} created successfully." if File.exists?(html_filename)
+  return html_filename
 end
 
 options = {}
@@ -60,4 +60,7 @@ end
 flvs = Dir.glob("#{search}*.{#{$FILE_TYPES.join(",")}}") 
 File.delete("#{top_folder}List of Links.txt") if File.exists?("#{top_folder}List of Links.txt")
 flvs.sort_by! { |flv| flv.scan("/").length }
-flvs.each { |flv| output_html_wrapper(flv, top_folder) }
+flvs.each { |flv|
+  html_filename = output_html_wrapper(flv, top_folder)
+  puts "#{html_filename} created successfully." if File.exists?(html_filename)
+  }
