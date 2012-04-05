@@ -22,7 +22,7 @@ def output_html_wrapper(flv_filename, output_folder)
   link_list.write($BASE_URL + link + "\n")
   link_list.close
 	
-  puts "#{html_filename} created successfully." if File.exists?(html_filename)
+  return html_filename
 end
 
 puts "Enter the full directory path of the flv files." unless ARGV[0]
@@ -35,4 +35,8 @@ end
 
 flvs = Dir.glob("#{folder}*.flv") 
 File.delete("#{folder}List of Links.txt") if File.exists?("#{folder}List of Links.txt")
-flvs.each { |flv| output_html_wrapper(flv, folder) }
+flvs.each { 
+  |flv| 
+  html_filename = output_html_wrapper(flv, folder) 
+  puts "#{html_filename} created successfully." if File.exists?(html_filename)
+}
