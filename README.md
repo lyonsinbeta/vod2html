@@ -16,15 +16,15 @@ also outputs a .txt file with URLs to all the HTML files.
 
 This version of vod2html has two new features, utilized via command line switches. 
 
-1. -r, --recursive		Recursively scan subdirectories
-2. -b, --bothtypes		Scans for .f4v in addition to .flv
-3. -h, --help			Displays help
+1. -r, --recursive           Recursively scan subdirectories
+2. -b, --bothtypes           Scans for .f4v in addition to .flv
+3. -h, --help                Displays help
 
 ### Example
 
 	ruby vod2html.rb -rb y:/vod/some_folder
 
-This will recursive scan y:/vod/some_folder for all .f4v and .flv files, and create their corresponding HTML file, as well as a sorted link list in the top folder (some_folder, in this case). 
+This will recursively scan y:/vod/some_folder for all .f4v and .flv files, and create their corresponding HTML file, as well as a sorted link list in the top folder (some_folder, in this case). 
 
 ## License
 
