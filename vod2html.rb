@@ -1,6 +1,8 @@
 require 'optparse'
 
-$EMBED_HTML = "" 
+$EMBED_HTML = << EOF
+# Add your embed code here
+EOF 
 
 $BASE_URL = ""
 
