@@ -1,14 +1,5 @@
 require 'optparse'
-
-$EMBED_HTML = << EOF
-# Add your embed code here
-EOF 
-
-$BASE_URL = ""
-
-$SAMPLE_FLV = ""
-
-$FILE_TYPES = ["flv"]
+include 'config.rb'
 
 def normalize_directory(dir)
   normalized = dir.gsub('\\', '/')
@@ -66,3 +57,4 @@ flvs.each { |flv|
   html_filename = output_html_wrapper(flv, top_folder)
   puts "#{html_filename} created successfully." if File.exists?(html_filename)
   }
+
