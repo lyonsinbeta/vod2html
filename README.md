@@ -19,7 +19,8 @@ This version of vod2html has two new features, utilized via command line switche
 
 1. -r, --recursive           Recursively scan subdirectories
 2. -b, --bothtypes           Scans for .f4v in addition to .flv
-3. -h, --help                Displays help
+3. -m, --mp4                 Scans for .mp4 in addition to .flv
+4. -h, --help                Displays help
 
 ### Example
 
