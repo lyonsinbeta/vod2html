@@ -1,5 +1,5 @@
 require 'optparse'
-include 'config.rb'
+require './config.rb'
 
 def normalize_directory(dir)
   normalized = dir.gsub('\\', '/')
@@ -31,6 +31,11 @@ OptionParser.new do |opts|
   opts.on("-b", "--bothtypes", "Scans for .f4v in addition to .flv") do |b|
 	options[:bothtypes] = b
 	$FILE_TYPES << "f4v"
+  end
+
+  opts.on("-m", "--mp4", "Scans for .mp4 in addition to .flv. USE WITH CAUTION") do |m|
+  options[:mp4] = m
+  $FILE_TYPES << "mp4"
   end
 
   opts.on("-h", "--help", "Displays help") do
